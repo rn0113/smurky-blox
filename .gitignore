@@ -1,0 +1,6 @@
+# Roblox place files you save locally (the code lives in src/, not in these)
+*.rbxl
+*.rbxlx
+*.rbxl.lock
+*.rbxlx.lock
+sourcemap.json
