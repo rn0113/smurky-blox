@@ -6,7 +6,7 @@
 	  2. Puts each player who joins into the crew with the FEWEST players.
 	  3. Warns you in the Output window if a crew has no spawn point yet.
 
-	The ".server.luau" ending tells Rojo to make this a normal Script
+	The ".server.luau" ending tells Script Sync to make this a normal Script
 	(server-side). Server scripts run on Roblox's computers, not players'
 	machines, so players can't tamper with them. That's why team choice
 	happens here.
@@ -20,8 +20,8 @@ local Players = game:GetService("Players")
 local Teams = game:GetService("Teams")
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
 
--- Load the crew settings. `ReplicatedStorage.Shared` is the folder Rojo
--- creates from src/shared, and CrewConfig is the module inside it.
+-- Load the crew settings. `ReplicatedStorage.Shared` is the folder synced
+-- from src/shared, and CrewConfig is the module inside it.
 local CrewConfig = require(ReplicatedStorage.Shared.CrewConfig)
 
 -- We'll remember which Team object belongs to which crew ID.
