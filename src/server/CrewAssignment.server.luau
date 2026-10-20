@@ -28,6 +28,33 @@ local CrewConfig = require(ReplicatedStorage.Shared.CrewConfig)
 local teamsByCrewId = {}
 
 ------------------------------------------------------------------------
+-- 0. Check the config for mistakes
+------------------------------------------------------------------------
+-- A typo in CrewConfig would otherwise cause a confusing error further
+-- down (or silently break spawning). `error(...)` stops this script and
+-- shows the message in red in the Output window, so you know exactly
+-- what to fix.
+local usedColors = {} -- colour name -> crew ID that already uses it
+
+for _, crewId in CrewConfig.ActiveCrews do
+	local crew = CrewConfig.Crews[crewId]
+	if crew == nil then
+		error("[CrewAssignment] ActiveCrews lists '" .. crewId .. "', but CrewConfig.Crews has no crew with that ID. Check the spelling.")
+	end
+
+	if CrewConfig.PerkStrength[crew.Perk] == nil then
+		error("[CrewAssignment] " .. crewId .. " has Perk '" .. tostring(crew.Perk) .. "', which isn't in CrewConfig.PerkStrength.")
+	end
+
+	-- Two crews with the same TeamColor would share spawn points.
+	local colorName = crew.TeamColor.Name
+	if usedColors[colorName] then
+		error("[CrewAssignment] " .. crewId .. " and " .. usedColors[colorName] .. " both use TeamColor '" .. colorName .. "'. Every crew needs its own colour.")
+	end
+	usedColors[colorName] = crewId
+end
+
+------------------------------------------------------------------------
 -- 1. Create the teams
 ------------------------------------------------------------------------
 -- `for _, crewId in list do` loops over the list one item at a time.
@@ -83,6 +110,13 @@ end
 -- 3. Assign players as they join
 ------------------------------------------------------------------------
 local function onPlayerAdded(player)
+	-- Skip anyone who already has a crew. A player who joins just as this
+	-- script starts can reach this function twice (once from the event,
+	-- once from the loop at the bottom), and we don't want to move them.
+	if player:GetAttribute("CrewId") ~= nil then
+		return
+	end
+
 	local team = pickCrewForNewPlayer()
 
 	if team == nil then
