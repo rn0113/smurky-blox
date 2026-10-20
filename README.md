@@ -33,3 +33,30 @@ File endings tell Script Sync what kind of script to make:
 - Commit and push from GitHub Desktop to save your code.
 - **Save your place file** too (`File > Publish to Roblox`). Script Sync only syncs scripts.
   The 3D map, lighting and models are saved in the place file, not in this repo.
+
+## Building the bases and chop shops
+`src/server/MapBuilder.luau` builds detailed crew bases and chop shops straight into your map.
+You run it once from the Command Bar, and the result is saved in your place file.
+
+1. Stop any playtest. Open **View > Command Bar** (a text box at the bottom of Studio).
+2. For crew bases, make sure each crew has its SpawnLocation (TeamColor set, Neutral unticked),
+   standing on open, flat ground with about 80 × 80 studs of space. The spawn's front faces where the gate will go.
+   For a chop shop, place any part where you want the doors and click it so it's selected.
+3. Paste one line into the Command Bar and press Enter:
+   ```lua
+   require(game.ServerScriptService.Server.MapBuilder).lighting()
+   require(game.ServerScriptService.Server.MapBuilder).allCrewBases()
+   require(game.ServerScriptService.Server.MapBuilder).chopShop()
+   ```
+   `crewBase("MudlarkMob")` builds just one base. `chopShop("MudlarkMob")` uses that crew's colours.
+4. Don't like it? Press **Ctrl+Z**. Running `crewBase` again replaces that crew's old generated base.
+   It never deletes things you built yourself.
+5. **Publish** the place so the new buildings are saved.
+
+If you change the builder code, restart Studio before running it again. The Command Bar
+remembers the old version of a module until then.
+
+## Outfits
+`src/shared/OutfitConfig.luau` sets what each team wears. Every player automatically gets
+crew-coloured gear (armband + chest badge), and the Police get a stab vest. To add matching uniform
+clothing, put a Shirt or Pants asset ID into `ShirtId` / `PantsId` for each team (0 = keep the player's own).
