@@ -176,4 +176,17 @@ function Kit.window(parent, cframe, width, height, lit, frameColor)
 	return group
 end
 
+-- Marks where a shop employee stands. The ShopEmployees script finds every
+-- part tagged "ShopEmployee" when the game starts and puts an employee
+-- there, facing the same way as the marker. `shopName` is what the
+-- employee calls their shop.
+function Kit.employeeSpot(parent, cframe, shopName)
+	local spot = Kit.block(parent, "EmployeeSpot", Vector3.new(2, 0.2, 2), cframe, Enum.Material.SmoothPlastic, Color3.fromRGB(80, 220, 120))
+	spot.Transparency = 0.5 -- a see-through green marker; hidden when the game runs
+	spot.CanCollide = false
+	spot:SetAttribute("ShopName", shopName)
+	spot:AddTag("ShopEmployee")
+	return spot
+end
+
 return Kit

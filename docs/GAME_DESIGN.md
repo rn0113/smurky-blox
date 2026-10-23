@@ -69,3 +69,8 @@ Each crew holds at most **6 players**.
   (e.g. "nick the Crown Jewels replica from a fictional museum"), with no realistic crime instructions.
   Payouts are equal for every crew. Only the Barrow Boys' +5% district-income perk differs,
   and it applies to district income, not job payouts.
+
+## Shop robberies (requested later)
+- Shops have NPC employees you can **talk** to, or **rob** through a short dialogue script.
+- Tone stays playful and non-violent: the robber talks the employee into opening the till (firm, bribe or sob story).
+- Payouts are the same for every crew. Police are alerted when a robbery starts, and can ask employees for tips.

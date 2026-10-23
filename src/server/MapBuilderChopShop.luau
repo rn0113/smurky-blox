@@ -223,6 +223,15 @@ function ChopShop.build(name, origin, accent, parent)
 		end
 	end
 
+	-- Shop counter in the front-right corner, with the employee behind it.
+	-- CFrame.Angles(0, math.pi / 2, 0) turns the marker to face into the bay.
+	local counterX = half - 4.5
+	Kit.block(inside, "Counter", Vector3.new(2, 3.6, 6), at(counterX, 1.9, 6), M.Slate, C.Charcoal)
+	Kit.block(inside, "CounterTop", Vector3.new(2.4, 0.2, 6.4), at(counterX, 3.8, 6), M.Marble, C.Stone)
+	Kit.block(inside, "CounterGlow", Vector3.new(0.15, 0.15, 6), at(counterX - 1.05, 3.55, 6), M.Neon, accent)
+	Kit.block(inside, "Till", Vector3.new(1, 0.8, 1.2), at(counterX, 4.3, 7.5), M.Metal, C.Charcoal)
+	Kit.employeeSpot(inside, at(half - 2.2, 0.2, 6) * CFrame.Angles(0, math.pi / 2, 0), "the Chop Shop")
+
 	-- Oil drums by the front-left corner.
 	Kit.cylinder(inside, "Drum", 2, 3, at(-(half - 2.5), 1.6, 4) * Kit.UPRIGHT, M.Metal, Color3.fromRGB(30, 60, 120))
 	Kit.cylinder(inside, "Drum", 2, 3, at(-(half - 2.5), 1.6, 6.4) * Kit.UPRIGHT, M.Metal, Color3.fromRGB(150, 30, 30))

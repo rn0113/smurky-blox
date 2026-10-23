@@ -11,8 +11,9 @@ Each folder in `src/` is synced to a Folder in Studio:
 |---|---|
 | `src/shared/` | `ReplicatedStorage > Shared` (code that both the server and players can read) |
 | `src/server/` | `ServerScriptService > Server` (code that only the server runs) |
+| `src/client/` | `StarterPlayer > StarterPlayerScripts > Client` (code that runs on each player's computer, e.g. on-screen menus) |
 
-The Studio folder names (`Shared`, `Server`) matter, because scripts refer to them by name.
+The Studio folder names (`Shared`, `Server`, `Client`) matter, because scripts refer to them by name.
 
 File endings tell Script Sync what kind of script to make:
 - `Name.server.luau` becomes a **Script** that runs on the server
@@ -23,7 +24,7 @@ File endings tell Script Sync what kind of script to make:
 1. Get this repo onto your computer. The easiest way is **GitHub Desktop**: **File > Clone repository**,
    pick `smurky-blox`, then switch to the branch you're working on with the **Current branch** button.
 2. In Studio, turn on **File > Beta Features > Script Sync** and restart Studio.
-3. In your place, create the two Folders listed in the table above (right-click the service in
+3. In your place, create the three Folders listed in the table above (right-click the service in
    **Explorer** > **Insert Object** > **Folder**, then rename it).
 4. Right-click each Folder and choose the Script Sync option. Point it at the matching folder in `src/`.
    If Studio asks which side to keep, choose the **files on disk**, because the code in this repo is the master copy.
@@ -60,3 +61,16 @@ remembers the old version of a module until then.
 `src/shared/OutfitConfig.luau` sets what each team wears. Every player automatically gets
 crew-coloured gear (armband + chest badge), and the Police get a stab vest. To add matching uniform
 clothing, put a Shirt or Pants asset ID into `ShirtId` / `PantsId` for each team (0 = keep the player's own).
+
+## Shop employees and robberies
+Every chop shop built by `MapBuilder` has a counter with an employee behind it. Walk up to them:
+- **[E] Talk**: a friendly chat. Police players get an extra "Seen anything suspicious?" option.
+- **[F] Rob** (hold): crews only. Pick what to say from the dialogue panel; your choice decides the payout.
+  Stay close while the till is emptied. Police get an alert as soon as a robbery starts.
+
+All dialogue lines, names and payouts are in `src/server/ShopConfig.luau`. Its top comment explains how to
+write new dialogue scripts.
+
+To put an employee in a shop you built yourself, insert a small Part where they should stand (facing the
+counter), and add the tag `ShopEmployee` under **Properties > Tags**. You can also add the attributes `ShopName` and `EmployeeName`.
+Chop shops built before this update don't have the counter, so run `chopShop()` again for those.
