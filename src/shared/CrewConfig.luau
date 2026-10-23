@@ -22,18 +22,10 @@ local CrewConfig = {}
 -- add "BarrowBoys" and "TowerBlockTerrors" to this list. Nothing else changes.
 CrewConfig.ActiveCrews = { "MudlarkMob", "BlackCabBrawlers" }
 
--- The most players any one crew can have.
-CrewConfig.MaxCrewSize = 6
-
--- The Police are their own team, not a crew, so they have their own cap.
--- Your game's server size (set on the Roblox website) should be no bigger
--- than MaxCrewSize × number of active crews + Police.MaxSize.
--- Right now that's 6 × 2 + 4 = 16.
-CrewConfig.Police = {
-	DisplayName = "Police",
-	TeamColor = BrickColor.new("Navy blue"),
-	MaxSize = 4,
-}
+-- The most players any one crew can have. Your game's server size
+-- (set on the Roblox website) should be no bigger than
+-- MaxCrewSize × number of active crews.
+CrewConfig.MaxCrewSize = 8
 
 -- Perk strengths. 0.05 means 5%. Keep them all equal for fairness.
 -- Step 1 doesn't use these yet. Each one gets wired up when its system

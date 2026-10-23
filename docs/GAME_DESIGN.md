@@ -39,25 +39,13 @@ Launch with 2 crews and expand to 4 later.
 
 Each crew has a colour, an outfit, one small perk, a hideout base and a spawn point.
 Friendly fire is off. All perk values live in `src/shared/CrewConfig.luau`.
-Each crew holds at most **6 players**.
-
-## Police (requested later)
-- A separate **Police** team of at most **4 players**, alongside the crews.
-- A fictional force: the word "POLICE" is fine, but no real force names, crests or checker patterns.
-- New players join whichever team (crew or Police) is the least full, measured against its cap.
-
-## Look and feel (requested later)
-- Crew bases and chop shops should look **premium**: stone trim, glass, bronze frames, lit windows,
-  crew-coloured neon accents, floodlights. `src/server/MapBuilder.luau` builds them.
-- Outfits should look **professional**: matching uniform clothing per team (set in
-  `src/shared/OutfitConfig.luau`) plus crew armbands/badges and a Police stab vest.
 
 ## Fairness (high priority)
 - Same standard weapons, health and speed for every crew. Weapons differ by role, not by crew;
   crew signature weapons are sidegrades in the same class.
 - One perk per crew, equal strength, each in a different area. All perks live in one config table.
 - Symmetrical map: same number of starting districts, similar income, similar distance from the centre.
-- Crew size is capped (6 per crew, 4 Police). New players join the least-full team, and balancing also considers rank.
+- Crew size is capped. New players join the smaller crew, and balancing also considers rank.
 - Catch-up: losing crews get cheaper defences and faster respawns. Districts get easier to retake
   the longer one crew holds them.
 - Weekly war resets everyone to an equal… *(brief was cut off here; to be completed)*
@@ -69,8 +57,3 @@ Each crew holds at most **6 players**.
   (e.g. "nick the Crown Jewels replica from a fictional museum"), with no realistic crime instructions.
   Payouts are equal for every crew. Only the Barrow Boys' +5% district-income perk differs,
   and it applies to district income, not job payouts.
-
-## Shop robberies (requested later)
-- Shops have NPC employees you can **talk** to, or **rob** through a short dialogue script.
-- Tone stays playful and non-violent: the robber talks the employee into opening the till (firm, bribe or sob story).
-- Payouts are the same for every crew. Police are alerted when a robbery starts, and can ask employees for tips.
