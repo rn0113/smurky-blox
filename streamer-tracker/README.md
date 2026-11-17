@@ -1,6 +1,7 @@
 # Streamer Tracker
 
 Checks whether these streamers are live, and how many people are watching, on **Twitch**, **Kick** and **YouTube**.
+It can also clip and record their streams with Streamlink: see `clip.py` below.
 It needs Python 3.8 or newer and nothing else to install. The list of streamers is in `streamers.json`.
 
 | Script | Platform | What you need |
@@ -27,6 +28,40 @@ python track_all.py --json                # JSON output, for piping into other t
 
 Each check shows: whether they're live, viewer count, how long they've been live, stream title, category or game,
 and the follower or subscriber count where the platform gives it out (Kick and YouTube).
+
+## Clipping with Streamlink (`clip.py`)
+Install **Streamlink** and **ffmpeg** first. No API keys are needed.
+- Windows: `winget install streamlink.streamlink`. Streamlink's installer includes ffmpeg, and `clip.py` finds it automatically.
+- macOS: `brew install streamlink ffmpeg`
+- Linux: `pip install streamlink` and `sudo apt install ffmpeg`
+
+```bash
+# Replay buffer: keeps the last 5 minutes. Press Enter to save the last 60 seconds,
+# type 30 or 2m to save a different length, and type q to quit.
+python clip.py buffer xqc
+python clip.py buffer "Kai Cenat" --vertical          # 9:16 clips for TikTok / Shorts / Reels
+python clip.py buffer ibai --clip 30 --keep 10m --quality 720p60
+
+# Record a whole stream. --wait waits for them to go live, and --forever records every stream.
+python clip.py record ishowspeed --wait --forever
+python clip.py record jasontheween --length 30m --from-start
+
+# Download just one part of a past broadcast (VOD)
+python clip.py vod https://www.twitch.tv/videos/2300000000 --start 1:02:03 --length 45
+python clip.py vod https://kick.com/xqc/videos/<id> --start 10m --end 11m30s
+
+# Cut a clip out of a recording (add --exact for a frame-exact cut, or --vertical for 9:16)
+python clip.py cut recordings/xQc/2026-11-17_21-00-00_kick.mp4 --start 12:30 --end 13:10
+```
+
+- **Who:** use a name or handle from `streamers.json`, any channel name, or a full URL.
+  The script checks Twitch, then Kick, then YouTube, and uses whichever one they're live on. `--platform kick` forces one.
+- **Where files go:** clips are saved in `clips/<streamer>/` and recordings in `recordings/<streamer>/`, both as `.mp4`.
+- **Buffer timing:** the replay buffer saves in roughly 2-second pieces, so a "last 60s" clip runs from 60 to about 62 seconds.
+  It covers what the stream showed, which is a few seconds behind real time, the same as what you'd see in the player.
+- **YouTube VODs:** these need `yt-dlp` (`pip install yt-dlp`), because Streamlink only handles YouTube live streams.
+- **Twitch ads:** Streamlink skips Twitch ads automatically, which can leave a short gap in a recording.
+- **Copyright:** only post clips in ways the streamer and the platform allow.
 
 ## Adding or fixing streamers
 Edit `streamers.json`. Each entry takes any of `twitch`, `kick` and `youtube` (a YouTube `@handle` or a `UC…` channel ID).
