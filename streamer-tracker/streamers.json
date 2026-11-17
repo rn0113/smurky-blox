@@ -1,0 +1,17 @@
+{
+  "_note": "Handles are best guesses - double-check each one. Remove a platform key if the streamer isn't on it.",
+  "streamers": [
+    {"name": "Kai Cenat",    "twitch": "kaicenat",     "youtube": "@KaiCenat"},
+    {"name": "IShowSpeed",   "twitch": "ishowspeed",   "youtube": "@IShowSpeed"},
+    {"name": "DarkViperAU",  "twitch": "darkviperau",  "youtube": "@DarkViperAU"},
+    {"name": "Lacy",         "twitch": "lacy",         "youtube": "@lacy"},
+    {"name": "Clix",         "twitch": "clix",         "youtube": "@Clix"},
+    {"name": "Marlon",       "twitch": "marlon",       "kick": "marlon"},
+    {"name": "JasonTheWeen", "twitch": "jasontheween", "youtube": "@jasontheween"},
+    {"name": "xQc",          "twitch": "xqc",          "kick": "xqc",  "youtube": "@xQcOW"},
+    {"name": "Ibai",         "twitch": "ibai",         "youtube": "@IbaiLlanos"},
+    {"name": "AuronPlay",    "twitch": "auronplay",    "youtube": "@auronplay"},
+    {"name": "Rubius",       "twitch": "rubius",       "youtube": "@elrubiusOMG"},
+    {"name": "TheGrefg",     "twitch": "thegrefg",     "youtube": "@TheGrefg"}
+  ]
+}
